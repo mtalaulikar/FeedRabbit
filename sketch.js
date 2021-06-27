@@ -21,14 +21,14 @@ function preload(){
 
 function setup(){
   
-  createCanvas(400,400);
+  createCanvas(displayWidth,displayHeight);
   
 // Moving background
-garden=createSprite(200,200);
-garden.addImage(gardenImg);
+////garden=createSprite(width/2,height/2,width,height);
+//garden.addImage(gardenImg);
 
 //creating boy running
-rabbit = createSprite(180,340,30,30);
+rabbit = createSprite(180,height-50,30,30);
 rabbit.scale = rScale;
 rabbit.addImage(rabbitImg);
 appleGroup = createGroup();
@@ -40,7 +40,7 @@ leafGroup = createGroup();
 
 
 function draw() {
-  background(0);
+  background(gardenImg);
   edges= createEdgeSprites();
   if (gameState === "play"){
     rabbit.collide(edges);
@@ -73,7 +73,7 @@ function draw() {
   if(gameState === "end"){
     background("Red");
     textSize(40);
-    text("GAME OVER", 100,200);
+    text("GAME OVER", width/2,height/2);
   }
 
   
@@ -88,7 +88,7 @@ function spawnApples(){
     apple.addImage("apple",appleImage);
     apple.velocityY = 4;
     apple.scale = 0.05;
-    apple.lifetime = 100;
+    apple.lifetime = (height/apple.velocityY);
     appleGroup.add(apple);
   }
 }
@@ -98,7 +98,7 @@ function spawnLeaf(){
     leaf.x = Math.round(random(50,350));
     leaf.velocityY = 2;
     leaf.scale = 0.05;
-    leaf.lifetime = 200;
+    leaf.lifetime = (height/leaf.velocityY);
 
     leafR = Math.round(random(1,3));
     switch(leafR) {
